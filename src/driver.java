@@ -6,7 +6,7 @@ public class driver {
 		
 		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		myFrame.setLocation(1000,0);
-		myFrame.setSize(500, 500);
+		myFrame.setSize(500, 750);
 		myFrame.setVisible(true);
 		myFrame.setTitle("Spheres");
 	}

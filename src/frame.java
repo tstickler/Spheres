@@ -3,6 +3,8 @@
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class frame extends JFrame {
 	
@@ -29,6 +31,7 @@ public class frame extends JFrame {
 		Font labelFont = new Font("", Font.PLAIN, 18);
 		Font messageFont = new Font("", Font.BOLD, 18);
 		
+		
 		//Add the title
 		title.setFont(titleFont);
 		addItem(thePanel, title, 1, 0, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
@@ -53,6 +56,7 @@ public class frame extends JFrame {
 		addItem(thePanel, surfaceLabel, 0, 4, 1, 1, GridBagConstraints.WEST, GridBagConstraints.NONE);
 		
 		//Output surface area based off user radius
+		surfaceArea.setEditable(false);
 		addItem(thePanel, surfaceArea, 1, 4, 2, 1, GridBagConstraints.EAST, GridBagConstraints.HORIZONTAL);
 		
 		//Label volume
@@ -60,6 +64,7 @@ public class frame extends JFrame {
 		addItem(thePanel, volumeLabel, 0, 5, 1, 1, GridBagConstraints.WEST, GridBagConstraints.NONE);
 		
 		//Output volume based off user radius
+		volume.setEditable(false);
 		addItem(thePanel, volume, 1, 5, 2, 1, GridBagConstraints.EAST, GridBagConstraints.HORIZONTAL);
 		
 		//Message to user
@@ -67,10 +72,13 @@ public class frame extends JFrame {
 		addItem(thePanel, messageLabel, 0, 6, 3, 1, GridBagConstraints.WEST, GridBagConstraints.NONE);
 		
 		//Add the buttons for compute, clear, and exit
+		buttonHandler myHandler = new buttonHandler();
 		addItem(thePanel, computeButton, 0, 8, 1, 1, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL);
+		computeButton.addActionListener(myHandler);
 		addItem(thePanel, clearButton, 1, 8, 1, 1, GridBagConstraints.WEST, GridBagConstraints.NONE);
+		clearButton.addActionListener(myHandler);
 		addItem(thePanel, exitButton, 2, 8, 1, 1, GridBagConstraints.EAST, GridBagConstraints.HORIZONTAL);
-
+		exitButton.addActionListener(myHandler);
 		
 		this.add(thePanel);
 	}
@@ -89,5 +97,44 @@ public class frame extends JFrame {
 		
 		myPanel.add(item, cons);
 			
+	}
+	
+	private class buttonHandler implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if(e.getSource() == computeButton){
+				String inputString = radiusInput.getText();
+				
+				if (inputString.length() == 0){
+					messageLabel.setText("Message: empty input field interpreted as 0.00");
+				}
+				else {
+					try{
+						double inputDouble = Double.parseDouble(inputString);
+						
+						double sa = computation.computeSurfaceArea(inputDouble);
+						double v = computation.computeVolume(inputDouble);
+						
+						surfaceArea.setText(sa + " square inches");
+						volume.setText(v + " cubic inches");
+						
+						messageLabel.setText("Message: computation successful");
+					}
+					catch (NumberFormatException exception){
+						messageLabel.setText("Message: error in input, please fix and then try again");
+					}
+				}
+			}
+			else if(e.getSource() == clearButton){
+				radiusInput.setText("");
+				surfaceArea.setText("");
+				volume.setText("");
+				messageLabel.setText("Message: all fields are now blank");
+				
+			}else if(e.getSource() == exitButton){
+				messageLabel.setText("Message: this program will now close");
+				
+				System.exit(0);
+			}
+		}
 	}
 }
