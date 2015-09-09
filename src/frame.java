@@ -1,3 +1,5 @@
+//Programmed by Tyler Stickler
+
 import javax.swing.*;
 
 import java.awt.*;
