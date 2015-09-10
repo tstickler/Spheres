@@ -1,9 +1,9 @@
 
-public class computation {
+public class SpheresComputation {
 	static double pi = Math.PI;
 	
 	public static double computeSurfaceArea(double r){
-		double surfaceArea = (pi * Math.pow(r, 2));
+		double surfaceArea = ( 4 * (pi * Math.pow(r, 2)));
 		
 		return surfaceArea;
 	}

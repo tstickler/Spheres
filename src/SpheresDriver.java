@@ -2,9 +2,9 @@ import javax.swing.JFrame;
 import java.awt.Toolkit;
 import java.awt.Dimension;
 
-public class driver {
+public class SpheresDriver {
 	public static void main(String[] args) {
-		frame myFrame = new frame();
+		SpheresFrame myFrame = new SpheresFrame();
 		
 		/*Sets the window to open in the middle of the screen
 		Toolkit tk = Toolkit.getDefaultToolkit();

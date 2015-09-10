@@ -1,6 +1,13 @@
 //Programmed by Tyler Stickler
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.Timer;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+
 import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -8,7 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
 
-public class frame extends JFrame {
+public class SpheresFrame extends JFrame {
 	
 	//Declarations all of the UI elements to be used in the project
 	JLabel title = new JLabel("Spheres");
@@ -29,7 +36,7 @@ public class frame extends JFrame {
 	
 	Timer delayClose;
 	
-	public frame(){
+	public SpheresFrame(){
 		//Creates a panel attach all the UI elements to
 		JPanel thePanel = new JPanel(new GridBagLayout());
 		
@@ -132,8 +139,8 @@ public class frame extends JFrame {
 					try{
 						double inputDouble = Double.parseDouble(inputString);
 						
-						double sa = computation.computeSurfaceArea(inputDouble);
-						double v = computation.computeVolume(inputDouble);
+						double sa = SpheresComputation.computeSurfaceArea(inputDouble);
+						double v = SpheresComputation.computeVolume(inputDouble);
 						
 						surfaceArea.setText(sa + " square inches");
 						volume.setText(v + " cubic inches");
