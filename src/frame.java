@@ -1,10 +1,12 @@
 //Programmed by Tyler Stickler
 
 import javax.swing.*;
-
-import java.awt.*;
+import java.awt.Font;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Color;
 
 public class frame extends JFrame {
 	
@@ -14,7 +16,7 @@ public class frame extends JFrame {
 	JLabel computedLabel = new JLabel("These results were computed:");
 	JLabel surfaceLabel = new JLabel("Surface Area:");
 	JLabel volumeLabel = new JLabel("Volume:");
-	JLabel messageLabel = new JLabel("");
+	JLabel messageLabel = new JLabel("Message: enter a radius");
 	
 	JTextField radiusInput = new JTextField(25);
 	JTextField surfaceArea = new JTextField(25);
@@ -32,56 +34,65 @@ public class frame extends JFrame {
 		Font messageFont = new Font("", Font.BOLD, 18);
 		
 		
+		/* This section of code adds all the labels, text fields, and buttons to a panel which is then added
+		 * to the frame.
+		 * 
+		 * The use of addItem function allows formatting the grids to hold the components neatly. It also
+		 * allows for better readability and reduces repeat code that handled the formatting. 
+		 * 
+		 * addItem(panel, component, Cell X Position, Cell Y Position, Cell width, Cell height, location in cell, fill Cell)
+		 *  */
+		
 		//Add the title
 		title.setFont(titleFont);
 		addItem(thePanel, title, 1, 0, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
 		
 		//Add programmed by
 		name.setFont(labelFont);
-		addItem(thePanel, name, 1, 1, 1, 1, GridBagConstraints.NORTH, GridBagConstraints.NONE);
+		addItem(thePanel, name, 1, 0, 1, 1, GridBagConstraints.SOUTH, GridBagConstraints.NONE);
 		
 		//Add prompt to input radius
 		inputLabel.setFont(labelFont);
-		addItem(thePanel, inputLabel, 0, 2, 1, 1, GridBagConstraints.WEST, GridBagConstraints.NONE);
+		addItem(thePanel, inputLabel, 0, 1, 1, 1, GridBagConstraints.WEST, GridBagConstraints.NONE);
 		
 		//Get radius from user
-		addItem(thePanel, radiusInput, 1, 2, 2, 1, GridBagConstraints.EAST, GridBagConstraints.HORIZONTAL);
+		addItem(thePanel, radiusInput, 1, 1, 2, 1, GridBagConstraints.EAST, GridBagConstraints.HORIZONTAL);
 		
 		//Label computation section
 		computedLabel.setFont(messageFont);
-		addItem(thePanel, computedLabel, 1, 3, 1, 1, GridBagConstraints.SOUTH, GridBagConstraints.NONE);
+		addItem(thePanel, computedLabel, 1, 2, 1, 1, GridBagConstraints.SOUTH, GridBagConstraints.NONE);
 		
 		//Label surface area
 		surfaceLabel.setFont(labelFont);
-		addItem(thePanel, surfaceLabel, 0, 4, 1, 1, GridBagConstraints.WEST, GridBagConstraints.NONE);
+		addItem(thePanel, surfaceLabel, 0, 3, 1, 1, GridBagConstraints.WEST, GridBagConstraints.NONE);
 		
 		//Output surface area based off user radius
 		surfaceArea.setEditable(false);
-		addItem(thePanel, surfaceArea, 1, 4, 2, 1, GridBagConstraints.EAST, GridBagConstraints.HORIZONTAL);
+		addItem(thePanel, surfaceArea, 1, 3, 2, 1, GridBagConstraints.EAST, GridBagConstraints.HORIZONTAL);
 		
 		//Label volume
 		volumeLabel.setFont(labelFont);
-		addItem(thePanel, volumeLabel, 0, 5, 1, 1, GridBagConstraints.WEST, GridBagConstraints.NONE);
+		addItem(thePanel, volumeLabel, 0, 4, 1, 1, GridBagConstraints.WEST, GridBagConstraints.NONE);
 		
 		//Output volume based off user radius
 		volume.setEditable(false);
-		addItem(thePanel, volume, 1, 5, 2, 1, GridBagConstraints.EAST, GridBagConstraints.HORIZONTAL);
+		addItem(thePanel, volume, 1, 4, 2, 1, GridBagConstraints.EAST, GridBagConstraints.HORIZONTAL);
 		
 		//Message to user
 		messageLabel.setFont(messageFont);
-		addItem(thePanel, messageLabel, 0, 6, 3, 1, GridBagConstraints.WEST, GridBagConstraints.NONE);
+		addItem(thePanel, messageLabel, 0, 5, 3, 1, GridBagConstraints.WEST, GridBagConstraints.NONE);
 		
 		//Add the buttons for compute, clear, and exit
 		buttonHandler myHandler = new buttonHandler();
-		addItem(thePanel, computeButton, 0, 8, 1, 1, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL);
+		addItem(thePanel, computeButton, 0, 7, 1, 1, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL);
 		computeButton.addActionListener(myHandler);
-		addItem(thePanel, clearButton, 1, 8, 1, 1, GridBagConstraints.WEST, GridBagConstraints.NONE);
+		addItem(thePanel, clearButton, 1, 7, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE);
 		clearButton.addActionListener(myHandler);
-		addItem(thePanel, exitButton, 2, 8, 1, 1, GridBagConstraints.EAST, GridBagConstraints.HORIZONTAL);
+		addItem(thePanel, exitButton, 2, 7, 1, 1, GridBagConstraints.EAST, GridBagConstraints.HORIZONTAL);
 		exitButton.addActionListener(myHandler);
 		
 		this.add(thePanel);
-	}
+	} //End constructor
 	
 	private void addItem(JPanel myPanel, JComponent item, int xGrid, int yGrid, int width, int height, int location, int fill) {
 		GridBagConstraints cons = new GridBagConstraints();
@@ -97,7 +108,7 @@ public class frame extends JFrame {
 		
 		myPanel.add(item, cons);
 			
-	}
+	} // End addItem function
 	
 	private class buttonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -106,6 +117,9 @@ public class frame extends JFrame {
 				
 				if (inputString.length() == 0){
 					messageLabel.setText("Message: empty input field interpreted as 0.00");
+					radiusInput.setText("0.00");
+					surfaceArea.setText("0.00 square inches");
+					volume.setText("0.00 cubic inches");
 				}
 				else {
 					try{
@@ -136,5 +150,5 @@ public class frame extends JFrame {
 				System.exit(0);
 			}
 		}
-	}
-}
+	} // End actionListener class
+} // End frame class

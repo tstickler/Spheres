@@ -1,12 +1,23 @@
 import javax.swing.JFrame;
+import java.awt.Toolkit;
+import java.awt.Dimension;
 
 public class driver {
 	public static void main(String[] args) {
 		frame myFrame = new frame();
 		
+		/*Sets the window to open in the middle of the screen
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Dimension dm = tk.getScreenSize();
+		int width = 550;
+		int height =750;
+		int xPos = (dm.width / 2) - width/2;
+		int yPos = (dm.height / 2) - height/2;
+		*/
+		
 		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		myFrame.setLocation(1000,0);
-		myFrame.setSize(500, 750);
+		myFrame.setLocation(0,0);
+		myFrame.setSize(550, 750);
 		myFrame.setVisible(true);
 		myFrame.setTitle("Spheres");
 	}
