@@ -10,6 +10,7 @@ import java.awt.Color;
 
 public class frame extends JFrame {
 	
+	//Declarations all of the UI elements to be used in the project
 	JLabel title = new JLabel("Spheres");
 	JLabel name = new JLabel("Programmed by Tyler Stickler");
 	JLabel inputLabel = new JLabel("Enter a radius:");
@@ -26,9 +27,13 @@ public class frame extends JFrame {
 	JButton clearButton = new JButton("Clear");
 	JButton exitButton = new JButton("Exit");
 	
+	Timer delayClose;
+	
 	public frame(){
+		//Creates a panel attach all the UI elements to
 		JPanel thePanel = new JPanel(new GridBagLayout());
 		
+		//Allows using different font size/style for messages
 		Font titleFont = new Font("", Font.BOLD, 42);
 		Font labelFont = new Font("", Font.PLAIN, 18);
 		Font messageFont = new Font("", Font.BOLD, 18);
@@ -90,6 +95,7 @@ public class frame extends JFrame {
 		clearButton.addActionListener(myHandler);
 		addItem(thePanel, exitButton, 2, 7, 1, 1, GridBagConstraints.EAST, GridBagConstraints.HORIZONTAL);
 		exitButton.addActionListener(myHandler);
+		delayClose = new Timer(1000, myHandler);
 		
 		this.add(thePanel);
 	} //End constructor
@@ -116,6 +122,7 @@ public class frame extends JFrame {
 				String inputString = radiusInput.getText();
 				
 				if (inputString.length() == 0){
+					messageLabel.setForeground(Color.BLACK);
 					messageLabel.setText("Message: empty input field interpreted as 0.00");
 					radiusInput.setText("0.00");
 					surfaceArea.setText("0.00 square inches");
@@ -131,9 +138,13 @@ public class frame extends JFrame {
 						surfaceArea.setText(sa + " square inches");
 						volume.setText(v + " cubic inches");
 						
+						messageLabel.setForeground(Color.GREEN);
 						messageLabel.setText("Message: computation successful");
 					}
 					catch (NumberFormatException exception){
+						surfaceArea.setText("error");
+						volume.setText("error");
+						messageLabel.setForeground(Color.RED);
 						messageLabel.setText("Message: error in input, please fix and then try again");
 					}
 				}
@@ -142,11 +153,15 @@ public class frame extends JFrame {
 				radiusInput.setText("");
 				surfaceArea.setText("");
 				volume.setText("");
+				messageLabel.setForeground(Color.BLACK);
 				messageLabel.setText("Message: all fields are now blank");
 				
 			}else if(e.getSource() == exitButton){
+				messageLabel.setForeground(Color.BLACK);
 				messageLabel.setText("Message: this program will now close");
 				
+				delayClose.start();
+			}else if(e.getSource() == delayClose){
 				System.exit(0);
 			}
 		}
