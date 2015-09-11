@@ -1,4 +1,13 @@
-//Programmed by Tyler Stickler
+/* 
+* Programmer's name: Tyler Stickler
+* Email address:     Stickler@csu.fullerton.edu
+* Course:            CPSC223J
+* Assignment number: 1
+* Due date:          Sept 14, 2015
+* Title:             Spheres
+* Purpose:           Find the surface area and volume of any sphere
+* This file name:    SpheresFrame.java
+*/
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;

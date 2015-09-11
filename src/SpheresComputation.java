@@ -1,3 +1,13 @@
+/* 
+* Programmer's name: Tyler Stickler
+* Email address:     Stickler@csu.fullerton.edu
+* Course:            CPSC223J
+* Assignment number: 1
+* Due date:          Sept 14, 2015
+* Title:             Spheres
+* Purpose:           Find the surface area and volume of any sphere
+* This file name:    SpheresComputation.java
+*/
 
 public class SpheresComputation {
 	static double pi = Math.PI;
