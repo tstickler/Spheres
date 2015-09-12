@@ -13,12 +13,16 @@ public class SpheresComputation {
 	static double pi = Math.PI;
 	
 	public static double computeSurfaceArea(double r){
+		// Surface area of a sphere is 4πr^2
+		
 		double surfaceArea = ( 4 * (pi * Math.pow(r, 2)));
 		
 		return surfaceArea;
 	}
 	
 	public static double computeVolume(double r){
+		// Volume of a sphere is (4/3)πr^3
+		
 		double volume = ((double)4/3) * pi * Math.pow(r, 3);
 		
 		return volume;
