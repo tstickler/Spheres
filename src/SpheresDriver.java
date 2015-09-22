@@ -21,7 +21,11 @@ public class SpheresDriver {
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Dimension dm = tk.getScreenSize();
 		int width = 750;
+<<<<<<< HEAD
 		int height =1000;
+=======
+		int height = 1000;
+>>>>>>> origin/master
 		int xPos = (dm.width / 2) - width/2;
 		int yPos = (dm.height / 2) - height/2;
 		

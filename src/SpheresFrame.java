@@ -137,6 +137,7 @@ public class SpheresFrame extends JFrame {
 			if(e.getSource() == computeButton){
 				String inputString = radiusInput.getText();
 				
+				// If the input field is empty, assume input is 0.00
 				if (inputString.length() == 0){
 					messageLabel.setForeground(Color.BLACK);
 					messageLabel.setText("Message: empty input field interpreted as 0.00");
@@ -144,8 +145,10 @@ public class SpheresFrame extends JFrame {
 					surfaceArea.setText("0.00 square inches");
 					volume.setText("0.00 cubic inches");
 				}
+				// Do this if the input field has something in it
 				else {
-					try{
+					// Try to parse the string to get the value as a double 
+					try{ 
 						double inputDouble = Double.parseDouble(inputString);
 						
 						double sa = SpheresComputation.computeSurfaceArea(inputDouble);
@@ -157,6 +160,7 @@ public class SpheresFrame extends JFrame {
 						messageLabel.setForeground(Color.GREEN);
 						messageLabel.setText("Message: computation successful");
 					}
+					// If the parsing fails, the input was invalid 
 					catch (NumberFormatException exception){
 						surfaceArea.setText("error");
 						volume.setText("error");
@@ -166,6 +170,7 @@ public class SpheresFrame extends JFrame {
 				}
 			}
 			else if(e.getSource() == clearButton){
+				// Set all inputs to empty strings
 				radiusInput.setText("");
 				surfaceArea.setText("");
 				volume.setText("");
@@ -173,6 +178,7 @@ public class SpheresFrame extends JFrame {
 				messageLabel.setText("Message: all fields are now blank");
 				
 			}else if(e.getSource() == exitButton){
+				// Delay of 1 second after the button is clicked
 				messageLabel.setForeground(Color.BLACK);
 				messageLabel.setText("Message: this program will now close");
 				
